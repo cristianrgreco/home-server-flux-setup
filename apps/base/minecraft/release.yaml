@@ -24,4 +24,3 @@ spec:
     minecraftServer:
       eula: "true"
       serviceType: NodePort
-      nodePort: 25565
