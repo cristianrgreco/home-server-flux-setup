@@ -19,11 +19,11 @@ spec:
   values:
     resources:
       requests:
-        memory: 2048Mi
-        cpu: 1024m
+        cpu: 1
+        memory: 1024Mi
       limits:
+        cpu: 2
         memory: 2048Mi
-        cpu: 1024m
     minecraftServer:
       eula: true
       version: "1.21"
