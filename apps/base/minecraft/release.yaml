@@ -25,5 +25,7 @@ spec:
         memory: 2048Mi
         cpu: 1024m
     minecraftServer:
-      eula: "true"
+      eula: true
+      version: 1.21
+      memory: 2048M
       serviceType: NodePort
