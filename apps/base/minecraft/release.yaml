@@ -23,3 +23,4 @@ spec:
         cpu: 500m
     minecraftServer:
       eula: "true"
+      serviceType: NodePort
