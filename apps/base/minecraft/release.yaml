@@ -21,6 +21,9 @@ spec:
       requests:
         memory: 2048Mi
         cpu: 1024m
+      limits:
+        memory: 2048Mi
+        cpu: 1024m
     minecraftServer:
       eula: "true"
       serviceType: NodePort
