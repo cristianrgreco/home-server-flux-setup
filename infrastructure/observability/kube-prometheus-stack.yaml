@@ -53,6 +53,15 @@ spec:
          type: loki
          url: http://loki.observability.svc.cluster.local:3100
 ---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: grafana-charts
+  namespace: observability
+spec:
+  interval: 24h
+  url: https://grafana.github.io/helm-charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -66,7 +75,7 @@ spec:
       version: "2.x"
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community-charts
+        name: grafana-charts
         namespace: observability
       interval: 12h
   # https://github.com/grafana/helm-charts/blob/main/charts/loki-stack/values.yaml
