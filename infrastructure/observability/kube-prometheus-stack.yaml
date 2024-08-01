@@ -34,7 +34,16 @@ spec:
       ingress:
         enabled: true
         ingressClassName: nginx
+        path: /grafana
         annotations:
           kubernetes.io/ingress.class: nginx
         hosts:
-          - grafana.cursedcompass.tplinkdns.com
+          - cursedcompass.tplinkdns.com
+      grafana.ini:
+        security:
+          cookie_secure: false
+        server:
+          domain: cursedcompass.tplinkdns.com
+          protocol: http
+          root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+          serve_from_sub_path: true
