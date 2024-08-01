@@ -24,3 +24,7 @@ spec:
         name: loki-stack
         namespace: observability
       interval: 12h
+  values:
+    loki:
+      url: http://loki-stack.observability.svc.cluster.local:3100
+      isDefault: false
