@@ -26,4 +26,6 @@ spec:
       interval: 12h
   values:
     loki:
+      image:
+        tag: 2.9.3
       isDefault: false
