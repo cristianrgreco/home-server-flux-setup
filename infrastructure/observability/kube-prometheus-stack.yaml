@@ -48,10 +48,10 @@ spec:
           protocol: http
           root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
           serve_from_sub_path: true
-    additionalDataSources:
-     - name: loki
-       type: loki
-       url: http://loki.observability.svc.cluster.local:3100
+      additionalDataSources:
+       - name: loki
+         type: loki
+         url: http://loki.observability.svc.cluster.local:3100
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
