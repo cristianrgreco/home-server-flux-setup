@@ -17,4 +17,3 @@ ingress-nginx-controller-admission   ClusterIP   10.152.183.129   <none>        
 Setup network to port forward port 31375.
 
 Configure the Grafana values to create an nginx ingress for path `/grafana`. You'll also need to configure `grafana.ini` to set the root URL, else redirects such as `login` will go to `/`, resulting in a 404. 
-
