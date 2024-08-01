@@ -1,3 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: grafana-charts
+  namespace: observability
+spec:
+  interval: 120m0s
+  url: https://grafana.github.io/helm-charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -72,3 +82,25 @@ spec:
               url: http://loki:{{ .Values.loki.server.http_listen_port }}
               version: 1
               isDefault: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: promtail
+  namespace: observability
+spec:
+  interval: 30m
+  dependsOn:
+    - name: kube-prometheus-stack
+  chart:
+    spec:
+      version: "6.x"
+      chart: promtail
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+      interval: 60m
+  # https://github.com/grafana/helm-charts/blob/main/charts/promtail/values.yaml
+  values:
+    test:
+      enabled: false

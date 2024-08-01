@@ -1,3 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus-community-charts
+  namespace: observability
+spec:
+  interval: 24h
+  url: https://prometheus-community.github.io/helm-charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -11,7 +21,7 @@ spec:
       version: "61.x"
       sourceRef:
         kind: HelmRepository
-        name: grafana-charts
+        name: prometheus-community-charts
         namespace: observability
       interval: 12h
   values:
