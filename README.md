@@ -39,5 +39,4 @@ flux resume helmrelease -n minecraft minecraft
 
 ## To do
 
-1. Enable Minecraft backups
-   https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml#L435.
+1. Loki
