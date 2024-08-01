@@ -17,15 +17,10 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: loki-stack
-      version: "2.x"
+      chart: loki
+      version: "6.x"
       sourceRef:
         kind: HelmRepository
         name: loki-stack
         namespace: observability
       interval: 12h
-  values:
-    loki:
-      image:
-        tag: 2.9.3
-      isDefault: false
