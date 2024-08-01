@@ -34,5 +34,3 @@ spec:
       memory: 2048M
       serviceType: NodePort
       nodePort: 30000
-      overrideServerProperties: true
-      ops: CalvinHaristotle
