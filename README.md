@@ -16,8 +16,8 @@ Watch status. Useful after git pushing to the bootstrap repo.
 flux get kustomizations --watch
 ```
 
+Watch all events.
 ```bash
-# Watch all events
 flux events --watch
 ```
 
