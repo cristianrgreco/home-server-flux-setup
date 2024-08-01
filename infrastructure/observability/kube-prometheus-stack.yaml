@@ -51,7 +51,10 @@ spec:
       additionalDataSources:
        - name: loki
          type: loki
-         url: http://loki.observability.svc.cluster.local:3100
+         url: http://loki.observability.svc.cluster.local:{{ .Values.loki.server.http_listen_port }}
+         access: proxy
+         version: 1
+
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
@@ -62,25 +65,80 @@ spec:
   interval: 24h
   url: https://grafana.github.io/helm-charts
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: loki
   namespace: observability
 spec:
-  interval: 30m
+  interval: 5m
+  dependsOn:
+    - name: kube-prometheus-stack
   chart:
     spec:
-      chart: loki-stack
-      version: "2.x"
+      version: "5.x"
+      chart: loki
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
-        namespace: observability
-      interval: 12h
-  # https://github.com/grafana/helm-charts/blob/main/charts/loki-stack/values.yaml
+      interval: 60m
+  # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
   values:
-    grafana:
-      sidecar:
-        datasources:
-          enabled: false
+    loki:
+      auth_enabled: false
+      serviceMonitor:
+        enabled: true
+        labels:
+          app.kubernetes.io/part-of: kube-prometheus-stack
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: 'filesystem'
+      chunk_store_config:
+        max_look_back_period: 24h
+      compactor:
+        shared_store: filesystem
+        compaction_interval: 10m
+        delete_request_cancel_period: 10m
+        retention_enabled: true
+        retention_delete_delay: 2h
+        retention_delete_worker_count: 150
+      limits_config:
+        retention_period: 24h
+    gateway:
+      enabled: true
+    singleBinary:
+      replicas: 1
+    monitoring:
+      dashboards:
+        enabled: false
+      selfMonitoring:
+        enabled: false
+        grafanaAgent:
+          installOperator: false
+      lokiCanary:
+        enabled: false
+    test:
+      enabled: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: promtail
+  namespace: observability
+spec:
+  interval: 5m
+  dependsOn:
+    - name: kube-prometheus-stack
+  chart:
+    spec:
+      version: "6.x"
+      chart: promtail
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+      interval: 60m
+  # https://github.com/grafana/helm-charts/blob/main/charts/promtail/values.yaml
+  values:
+    test:
+      enabled: false
