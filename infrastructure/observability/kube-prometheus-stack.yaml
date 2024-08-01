@@ -153,6 +153,6 @@ spec:
             - name: Loki
               type: loki
               access: proxy
-              url: http://loki:{{ .Values.loki.server.http_listen_port }}
+              url: http://loki:3100
               version: 1
               isDefault: false
