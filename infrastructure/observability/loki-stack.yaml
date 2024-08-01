@@ -26,5 +26,4 @@ spec:
       interval: 12h
   values:
     loki:
-      url: http://loki-stack.observability.svc.cluster.local:3100
       isDefault: false
