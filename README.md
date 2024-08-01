@@ -39,12 +39,5 @@ flux resume helmrelease -n minecraft minecraft
 
 ## To do
 
-1. 
-2. Set `grafana.adminPassword` to anything non default.
-   1. Consider using sealed secrets so you can get the value from k8s.
-3. Decide whether persistence is required for Grafana. 
-   1. As we only use the default dashboards possibly not.
-4. Enable Minecraft backups
+1. Enable Minecraft backups
    https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml#L435.
-5. Enable Minecraft whitelist to restrict who can join.
-   1. Avoids griefers.
