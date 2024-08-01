@@ -29,3 +29,10 @@ spec:
         name: kube-prometheus-stack
         namespace: observability
       interval: 12h
+  values:
+    grafana:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - grafana.cursedcompass.tplinkdns.com
