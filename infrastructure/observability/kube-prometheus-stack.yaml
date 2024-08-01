@@ -36,13 +36,13 @@ spec:
         ingressClassName: nginx
         path: /grafana
         hosts:
-          - cursedcompass.tplinkdns.com
+          - cursedcompass.ddns.net
       # https://github.com/prometheus-community/helm-charts/issues/2837
       grafana.ini:
         security:
           cookie_secure: false
         server:
-          domain: cursedcompass.tplinkdns.com
+          domain: cursedcompass.ddns.net
           protocol: http
           root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
           serve_from_sub_path: true
