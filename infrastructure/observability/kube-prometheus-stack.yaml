@@ -34,5 +34,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          kubernetes.io/ingress.class: nginx
         hosts:
-          - grafana.cursedcompass.tplinkdns.com
+          - cursedcompass.tplinkdns.com
