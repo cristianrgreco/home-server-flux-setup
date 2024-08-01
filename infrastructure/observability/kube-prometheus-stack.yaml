@@ -26,6 +26,7 @@ spec:
       interval: 12h
   values:
     grafana:
+      adminPassword: 9dfsC6qiOoEN8vqWzSM36h37Zg6x9l59nndp4qhxIdt72l8mPd
       ingress:
         enabled: true
         ingressClassName: nginx
