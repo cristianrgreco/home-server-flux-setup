@@ -1,9 +1,5 @@
 # Home Server Flux Setup
 
-## Overview
-
-TODO
-
 ## Useful commands
 
 Show status and installed/available addons.
@@ -43,10 +39,12 @@ flux resume helmrelease -n minecraft minecraft
 
 ## To do
 
-1. Set `grafana.adminPassword` to anything non default.
-   2. Consider using sealed secrets so you can get the value from k8s.
-2. Decide whether persistence is required for Grafana. 
-   3. As we only use the default dashboards possibly not.
-3. Enable Minecraft backups
+1. 
+2. Set `grafana.adminPassword` to anything non default.
+   1. Consider using sealed secrets so you can get the value from k8s.
+3. Decide whether persistence is required for Grafana. 
+   1. As we only use the default dashboards possibly not.
+4. Enable Minecraft backups
    https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml#L435.
-4. Figure out why the Minecraft pod retains persistence after it is deleted when it is not a stateful set.
+5. Enable Minecraft whitelist to restrict who can join.
+   1. Avoids griefers.
