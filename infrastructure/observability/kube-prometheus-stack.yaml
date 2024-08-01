@@ -35,10 +35,9 @@ spec:
         enabled: true
         ingressClassName: nginx
         path: /grafana
-        annotations:
-          kubernetes.io/ingress.class: nginx
         hosts:
           - cursedcompass.tplinkdns.com
+      # https://github.com/prometheus-community/helm-charts/issues/2837
       grafana.ini:
         security:
           cookie_secure: false

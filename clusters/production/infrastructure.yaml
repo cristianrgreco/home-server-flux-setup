@@ -20,6 +20,8 @@ metadata:
   name: infra-observability
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-controllers
   interval: 10m0s
   sourceRef:
     kind: GitRepository
