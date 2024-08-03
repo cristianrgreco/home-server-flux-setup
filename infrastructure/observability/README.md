@@ -2,7 +2,7 @@
 
 ## Grafana Ingress
 
-> http://grafana.cursedcompass.ddns.net:31375
+> http://cursedcompass.ddns.net:31375/grafana
 
 Find the bound nginx HTTP port. In this case it is 31375.
 
