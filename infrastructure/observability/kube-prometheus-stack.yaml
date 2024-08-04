@@ -43,6 +43,7 @@ spec:
         namespace: observability
       interval: 12h
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
     grafana:
       admin:
@@ -57,6 +58,7 @@ spec:
           - cursedcompass.ddns.net
       persistence:
         enabled: true
+        type: sts
         size: 10Gi
       # https://github.com/prometheus-community/helm-charts/issues/2837
       grafana.ini:
