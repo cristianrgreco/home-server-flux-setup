@@ -55,6 +55,9 @@ spec:
         path: /grafana
         hosts:
           - cursedcompass.ddns.net
+      persistence:
+        enabled: true
+        size: 10Gi
       # https://github.com/prometheus-community/helm-charts/issues/2837
       grafana.ini:
         security:
