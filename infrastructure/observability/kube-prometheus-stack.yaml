@@ -58,8 +58,7 @@ spec:
           - cursedcompass.ddns.net
       persistence:
         enabled: true
-        type: sts
-        size: 10Gi
+        size: 5Gi
       # https://github.com/prometheus-community/helm-charts/issues/2837
       grafana.ini:
         security:
