@@ -39,4 +39,11 @@ flux resume helmrelease -n minecraft minecraft
 
 ## To do
 
-1. Loki
+1. Grafana adminPassword from secret.
+
+- https://github.com/prometheus-community/helm-charts/issues/1860#issuecomment-1063754826
+- https://fluxcd.io/flux/guides/sealed-secrets/
+
+2. Grafana persistence.
+
+3. Grafana alerts for CPU/memory usage and temperature to Discord webhook, OR configure SMTP for email alerts.
