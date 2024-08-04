@@ -58,9 +58,3 @@ flux reconcile hr -n minecraft minecraft
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
 ```
-
-## To do
-
-1. Grafana persistence.
-
-2. Grafana alerts for CPU/memory usage and temperature to Discord webhook, OR configure SMTP for email alerts.
