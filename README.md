@@ -1,49 +1,48 @@
 # Home Server Flux Setup
 
+## Observability
+
+http://cursedcompass.ddns.net:31375/grafana
+
+Get grafana admin credentials:
+
+```bash
+kubectl get secrets/grafana-adminuser-creds -n observability -o json \
+  | jq -r '.data.adminUser' | base64 -d
+
+kubectl get secrets/grafana-adminuser-creds -n observability -o json \
+  | jq -r '.data.adminPassword' | base64 -d
+```
+
+For posterity, this is how they were created:
+
+```bash
+kubectl -n observability create secret generic grafana-adminuser-creds \
+  --from-literal=admin-user='changeme' \
+  --from-literal=admin-password='changeme' \
+  --dry-run=client -o yaml \
+  > auth.yaml
+  
+kubeseal --format=yaml --cert=pub-sealed-secrets.pem \
+  < auth.yaml > auth-sealed.yaml
+  
+rm auth.yaml
+```
+
 ## Useful commands
 
-Show status and installed/available addons.
 ```bash
 microk8s status
-```
-
-Watch status. Useful after git pushing to the bootstrap repo.
-```bash
 flux get kustomizations --watch
-```
-
-Watch all events.
-```bash
 flux events --watch
-```
-
-Get status of helm releases. Useful to see what's happening. Note that `helmreleases` can be shortened to `hr`.
-```bash
 flux get helmreleases --all-namespaces
-```
-
-Trigger a reconciliation without waiting for the next interval.
-```bash
 flux reconcile hr -n minecraft minecraft
-```
-
-Suspend a release so you can make temporary changes.
-```bash
 flux suspend helmrelease -n minecraft minecraft
-```
-
-Resumes a suspended helm release.
-```bash
 flux resume helmrelease -n minecraft minecraft
 ```
 
 ## To do
 
-1. Grafana adminPassword from secret.
+1. Grafana persistence.
 
-- https://github.com/prometheus-community/helm-charts/issues/1860#issuecomment-1063754826
-- https://fluxcd.io/flux/guides/sealed-secrets/
-
-2. Grafana persistence.
-
-3. Grafana alerts for CPU/memory usage and temperature to Discord webhook, OR configure SMTP for email alerts.
+2. Grafana alerts for CPU/memory usage and temperature to Discord webhook, OR configure SMTP for email alerts.
