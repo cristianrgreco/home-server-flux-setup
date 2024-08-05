@@ -20,8 +20,8 @@ For posterity, this is how they were created:
 
 ```bash
 kubectl -n observability create secret generic grafana-adminuser-creds \
-  --from-literal=admin-user='changeme' \
-  --from-literal=admin-password='changeme' \
+  --from-literal=adminUser='changeme' \
+  --from-literal=adminPassword='changeme' \
   --dry-run=client -o yaml \
   > auth.yaml
   
@@ -58,3 +58,7 @@ flux reconcile hr -n minecraft minecraft
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
 ```
+
+## TODO
+
+- Add flux Grafana dashboards: https://fluxcd.io/flux/monitoring/metrics/
