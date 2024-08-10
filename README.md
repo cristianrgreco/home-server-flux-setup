@@ -49,7 +49,7 @@ Configure the Grafana values to create an nginx ingress for path `/grafana`. You
 
 ## Pihole
 
-http://cursedcompass.ddns.net:31375/pihole
+http://cursedcompass.ddns.net:30001/admin
 
 ### Admin user
 
@@ -71,7 +71,3 @@ flux reconcile hr -n minecraft minecraft
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
 ```
-
-## TODO
-
-- Add flux Grafana dashboards: https://fluxcd.io/flux/monitoring/metrics/
