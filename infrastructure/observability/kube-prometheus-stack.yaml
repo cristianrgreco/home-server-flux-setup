@@ -44,10 +44,6 @@ spec:
       interval: 12h
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
-  valuesFrom:
-    - kind: ConfigMap
-      name: flux-kube-state-metrics-config
-      valuesKey: kube-state-metrics-config.yaml
   values:
     grafana:
       admin:
