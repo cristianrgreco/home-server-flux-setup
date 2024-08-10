@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: pihole
+spec:
+  releaseName: pihole
+  chart:
+    spec:
+      chart: pihole
+      sourceRef:
+        kind: HelmRepository
+        name: pihole
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  # https://github.com/MoJo2600/pihole-kubernetes/blob/main/charts/pihole/values.yaml
+  values:
+    persistentVolume:
+      enabled: true
+      size: 500Mi
+    admin:
+      existingSecret: pihole-adminuser
+      passwordKey: password
