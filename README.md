@@ -47,6 +47,19 @@ Setup router to port forward port 31375.
 
 Configure the Grafana values to create an nginx ingress for path `/grafana`. You'll also need to configure `grafana.ini` to set the root URL, else redirects such as `login` will go to `/`, resulting in a 404.
 
+## Pihole
+
+http://cursedcompass.ddns.net:31375/pihole
+
+### Admin user
+
+Get pihole admin user password:
+
+```bash
+kubectl get secrets/pihole-adminuser -n pihole -o json \
+  | jq -r '.data.password' | base64 -d
+```
+
 ## Useful commands
 
 ```bash
