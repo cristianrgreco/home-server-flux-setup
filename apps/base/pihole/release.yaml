@@ -17,6 +17,12 @@ spec:
       retries: 3
   # https://github.com/MoJo2600/pihole-kubernetes/blob/main/charts/pihole/values.yaml
   values:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      path: /pihole
+      hosts:
+        - cursedcompass.ddns.net
     persistentVolume:
       enabled: true
       size: 500Mi
