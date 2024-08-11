@@ -75,8 +75,3 @@ flux reconcile hr -n minecraft minecraft
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
 ```
-
-# TODO
-
-1. MetalLB to ansible, or Helm + Flux
-2. Create IP address reservation for the pi in router settings
