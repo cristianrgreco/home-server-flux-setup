@@ -27,9 +27,16 @@ spec:
       loadBalancerIP: 192.168.0.241
       annotations:
           metallb.universe.tf/allow-shared-ip: pihole-svc
-    persistentVolume:
+    persistentVolumeClaim:
       enabled: true
       size: 500Mi
     admin:
       existingSecret: pihole-adminuser
       passwordKey: password
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
