@@ -18,9 +18,7 @@ spec:
   # https://github.com/MoJo2600/pihole-kubernetes/blob/main/charts/pihole/values.yaml
   values:
     serviceWeb:
-      type: NodePort
-      http:
-        nodePort: 30001
+      type: LoadBalancer
     persistentVolume:
       enabled: true
       size: 500Mi

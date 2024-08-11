@@ -71,3 +71,10 @@ flux reconcile hr -n minecraft minecraft
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
 ```
+
+# TODO
+
+1. Grafana to use LB
+2. Pihole to use LB
+3. Configure router to use pihole
+4. Do not port forward and expose internal services
