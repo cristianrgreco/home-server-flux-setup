@@ -48,6 +48,7 @@ spec:
     grafana:
       service:
         type: LoadBalancer
+        loadBalancerIP: 192.168.0.244
       admin:
         existingSecret: grafana-adminuser-creds
         userKey: adminUser
