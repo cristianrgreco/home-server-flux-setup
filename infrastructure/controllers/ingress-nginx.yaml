@@ -38,7 +38,3 @@ spec:
         type: "NodePort"
     admissionWebhooks:
       enabled: false
-    tcp:
-      "53": "pihole/pihole-dns-tcp:53"
-    udp:
-      "53": "pihole/pihole-dns-udp:53"
