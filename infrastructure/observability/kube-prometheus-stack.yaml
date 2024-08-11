@@ -46,6 +46,8 @@ spec:
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
     grafana:
+      service:
+        type: LoadBalancer
       admin:
         existingSecret: grafana-adminuser-creds
         userKey: adminUser
