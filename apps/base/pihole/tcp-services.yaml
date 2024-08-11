@@ -4,4 +4,4 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
-  53: "pihole/pihole-dns-tcp:53"
+  "53": "pihole/pihole-dns-tcp:53"
