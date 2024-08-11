@@ -19,8 +19,14 @@ spec:
   values:
     serviceWeb:
       type: LoadBalancer
+      loadBalancerIP: 192.168.0.241
+      annotations:
+        metallb.universe.tf/allow-shared-ip: pihole-svc
     serviceDns:
       type: LoadBalancer
+      loadBalancerIP: 192.168.0.241
+      annotations:
+          metallb.universe.tf/allow-shared-ip: pihole-svc
     persistentVolume:
       enabled: true
       size: 500Mi

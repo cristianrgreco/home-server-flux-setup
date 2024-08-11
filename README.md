@@ -78,6 +78,5 @@ flux resume helmrelease -n minecraft minecraft
 
 # TODO
 
-1. MetalLB to ansible
-2. Hardcode LB IPs in prod values so re-deployment wouldn't change
-3. Create IP address reservation for the pi in router settings
+1. MetalLB to ansible, or Helm + Flux
+2. Create IP address reservation for the pi in router settings
