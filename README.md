@@ -2,12 +2,39 @@
 
 ## MetalLB
 
-- DHCP address range
-- Init flags, etc
+> Allows you to create load balancers in your Kubernetes cluster.
+
+We need to reserve an IP address range for MetalLB to use.
+
+The router's current DHCP address pool is 192.168.0.2 - 192.168.0.253. We will shrink it to 192.168.0.2 - 192.168.0.239 to give us the following available address pool for MetalLB: 192.168.0.240 - 192.168.0.250.  
+
+> [!NOTE]  
+> We should install MetalLB via Helm + Flux in the future: https://metallb.universe.tf/installation/
+
+
+```bash
+microk8s enable metallb:192.168.0.240-192.168.0.251
+```
+
+### Ingress
+
+Find the bound nginx HTTP port. In this case it is 31375.
+
+```bash
+$ kubectl get service -n ingress-nginx
+
+NAME                                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller             NodePort    10.152.183.183   <none>        80:31375/TCP,443:32160/TCP   156m
+ingress-nginx-controller-admission   ClusterIP   10.152.183.129   <none>        443/TCP                      156m
+```
+
+Setup router to port forward port 31375.
+
+Configure the Grafana values to create an nginx ingress for path `/grafana`. You'll also need to configure `grafana.ini` to set the root URL, else redirects such as `login` will go to `/`, resulting in a 404.
 
 ## Observability
 
-http://cursedcompass.ddns.net:31375/grafana
+http://192.168.0.244
 
 ### Admin user
 
@@ -36,25 +63,9 @@ kubeseal --format=yaml --cert=pub-sealed-secrets.pem \
 rm auth.yaml
 ```
 
-### Ingress
-
-Find the bound nginx HTTP port. In this case it is 31375.
-
-```bash
-$ kubectl get service -n ingress-nginx
-
-NAME                                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-ingress-nginx-controller             NodePort    10.152.183.183   <none>        80:31375/TCP,443:32160/TCP   156m
-ingress-nginx-controller-admission   ClusterIP   10.152.183.129   <none>        443/TCP                      156m
-```
-
-Setup router to port forward port 31375. 
-
-Configure the Grafana values to create an nginx ingress for path `/grafana`. You'll also need to configure `grafana.ini` to set the root URL, else redirects such as `login` will go to `/`, resulting in a 404.
-
 ## Pihole
 
-http://cursedcompass.ddns.net:30001/admin
+http://192.168.0.241/admin
 
 ### Admin user
 
@@ -79,11 +90,6 @@ flux resume helmrelease -n minecraft minecraft
 
 # TODO
 
-1. Grafana to use LB
-2. Pihole to use LB
-3. Configure router to use pihole
-4. MetalLB to ansible
-   1. Consider doing it all via flux
-5. Do not port forward and expose internal services
-6. Update docs
-7. Hardcoded LB IPs in prod values so re-deployment wouldn't change
+1. MetalLB to ansible
+2. Hardcode LB IPs in prod values so re-deployment wouldn't change
+3. Create IP address reservation for the pi in router settings
