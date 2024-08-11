@@ -2,19 +2,11 @@
 
 ## MetalLB
 
-> Allows you to create load balancers in your Kubernetes cluster.
+Allows you to create load balancers in your Kubernetes cluster.
 
 We need to reserve an IP address range for MetalLB to use.
 
 The router's current DHCP address pool is 192.168.0.2 - 192.168.0.253. We will shrink it to 192.168.0.2 - 192.168.0.239 to give us the following available address pool for MetalLB: 192.168.0.240 - 192.168.0.250.  
-
-> [!NOTE]  
-> We should install MetalLB via Helm + Flux in the future: https://metallb.universe.tf/installation/
-
-
-```bash
-microk8s enable metallb:192.168.0.240-192.168.0.251
-```
 
 ## Ingress
 
@@ -22,7 +14,7 @@ http://192.168.0.240
 
 ## Observability
 
-http://192.168.0.244
+http://192.168.0.242
 
 ### Admin user
 
