@@ -6,3 +6,5 @@ resources:
   - secret-adminuser.yaml
   - repository.yaml
   - release.yaml
+  - tcp-services.yaml
+  - udp-services.yaml
