@@ -37,20 +37,3 @@ spec:
       interval: 12h
   # https://github.com/metallb/metallb/blob/main/charts/metallb/values.yaml
   values: {}
-
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: default-addresspool
-  namespace: metallb-system
-spec:
-  addresses:
-    - 192.168.0.240-192.168.0.251
-
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: default-advertise-all-pools
-  namespace: metallb-system
