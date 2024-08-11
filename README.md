@@ -16,7 +16,7 @@ The router's current DHCP address pool is 192.168.0.2 - 192.168.0.253. We will s
 microk8s enable metallb:192.168.0.240-192.168.0.251
 ```
 
-### Ingress
+## Ingress
 
 http://192.168.0.240
 
