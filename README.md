@@ -1,5 +1,10 @@
 # Home Server Flux Setup
 
+## MetalLB
+
+- DHCP address range
+- Init flags, etc
+
 ## Observability
 
 http://cursedcompass.ddns.net:31375/grafana
@@ -77,4 +82,8 @@ flux resume helmrelease -n minecraft minecraft
 1. Grafana to use LB
 2. Pihole to use LB
 3. Configure router to use pihole
-4. Do not port forward and expose internal services
+4. MetalLB to ansible
+   1. Consider doing it all via flux
+5. Do not port forward and expose internal services
+6. Update docs
+7. Hardcoded LB IPs in prod values so re-deployment wouldn't change
