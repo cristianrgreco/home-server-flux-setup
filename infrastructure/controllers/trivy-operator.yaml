@@ -30,3 +30,8 @@ spec:
         name: trivy-operator
         namespace: flux-system
       version: "0.x"
+  values:
+    serviceMonitor:
+      enabled: true
+    trivy:
+      ignoreUnfixed: true
