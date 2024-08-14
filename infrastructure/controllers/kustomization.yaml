@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - ingress-nginx.yaml
   - sealed-secrets.yaml
-  - trivy-operator.yaml
