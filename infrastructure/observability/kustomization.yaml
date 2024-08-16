@@ -4,7 +4,7 @@ configMapGenerator:
   - name: grafana-alerts
     namespace: observability
     files:
-      - alerts/custom-alert-rules3.yaml
+      - alerts/custom-alert-rules.yaml
     options:
       labels:
         grafana_alert: "1"
