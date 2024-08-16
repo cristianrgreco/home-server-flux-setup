@@ -152,7 +152,7 @@ spec:
                   execErrState: Error
                   for: 1m
                   annotations:
-                    summary: 'High device temperature detected: {{ index $values "A" }}C'
+                    summary: 'High device temperature detected: {{ index $$values "A" }}C'
                   labels: { }
                   isPaused: false
                   notification_settings:
@@ -212,7 +212,7 @@ spec:
                   execErrState: Error
                   for: 1m
                   annotations:
-                    summary: 'High CPU usage detected: {{ index $values "A" }}%'
+                    summary: 'High CPU usage detected: {{ index $$values "A" }}%'
                   labels: { }
                   isPaused: false
                   notification_settings:
@@ -273,7 +273,7 @@ spec:
                   execErrState: Error
                   for: 1m
                   annotations:
-                    summary: 'High memory usage detected: {{ index $values "A" }}%'
+                    summary: 'High memory usage detected: {{ index $$values "A" }}%'
                   labels: { }
                   isPaused: false
                   notification_settings:
@@ -331,7 +331,7 @@ spec:
                   execErrState: Error
                   for: 1m
                   annotations:
-                    summary: 'High disk usage detected: {{ index $values "A" }}%'
+                    summary: 'High disk usage detected: {{ index $$values "A" }}%'
                   labels: { }
                   isPaused: false
                   notification_settings:
