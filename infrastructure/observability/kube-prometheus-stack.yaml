@@ -76,8 +76,8 @@ spec:
       smtp:
         enabled: true
         existingSecret: grafana-smtp-creds
-        passwordKey: username
-        userKey: password
+        userKey: username
+        passwordKey: password
       grafana.ini:
         smtp:
           enabled: true
