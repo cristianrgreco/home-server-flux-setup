@@ -89,10 +89,10 @@ spec:
           enabled: true
           host: live.smtp.mailtrap.io:587
           from_address: mailtrap@demomailtrap.com
-      alerting:
-        custom-alert-rules.yaml:
-          file: configs/custom-alert-rules.yaml
-        custom-alert-rules2.yaml:
-          file: configs/custom-alert-rules2.yaml
-        custom-alert-rules3.yaml:
-          file: configs/custom-alert-rules3.yaml
+      sidecar:
+        dashboards:
+          enabled: true
+          searchNamespace: ALL
+        alerts:
+          enabled: true
+          searchNamespace: ALL
