@@ -92,3 +92,5 @@ spec:
       alerting:
         custom-alert-rules.yaml:
           file: configs/custom-alert-rules.yaml
+        custom-alert-rules2.yaml:
+          file: configs/custom-alert-rules2.yaml

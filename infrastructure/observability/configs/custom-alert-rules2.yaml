@@ -2,7 +2,7 @@ apiVersion: 1
 groups:
   - orgId: 1
     name: Thresholds
-    folder: Custom
+    folder: Custom2
     interval: 1m
     rules:
       - uid: fdv0br168nvnkc
