@@ -170,7 +170,7 @@ spec:
                         editorMode: code
                         expr: |
                           round((
-                            max((1 - sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal"}[$__rate_interval])))
+                            max((1 - sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal"}[$$__rate_interval])))
                           / ignoring(cpu) group_left
                             count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle"})
                           ) * 100), 0.01)
