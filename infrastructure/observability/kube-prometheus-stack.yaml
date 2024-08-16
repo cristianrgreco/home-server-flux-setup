@@ -62,10 +62,12 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
-    defaultRules:
-      kubeControllerManager: false
-      kubeProxy: false
-      kubeSchedulerAlerting: false
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
     grafana:
       service:
         type: LoadBalancer
