@@ -82,4 +82,4 @@ spec:
         smtp:
           enabled: true
           host: live.smtp.mailtrap.io:587
-          from_address: server@home.com
+          from_address: mailtrap@demomailtrap.com
