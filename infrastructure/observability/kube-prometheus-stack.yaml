@@ -63,14 +63,11 @@ spec:
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
     kubeControllerManager:
-      endpoints:
-        - 0.0.0.0
+      enabled: false
     kubeScheduler:
-      endpoints:
-        - 0.0.0.0
+      enabled: false
     kubeProxy:
-      endpoints:
-        - localhost
+      enabled: false
     grafana:
       service:
         type: LoadBalancer
