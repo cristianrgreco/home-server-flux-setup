@@ -5,6 +5,7 @@ configMapGenerator:
     namespace: observability
     files:
       - alerts/custom-alert-rules.yaml
+      - alerts/delete-custom3-alert-rules.yaml
     options:
       labels:
         grafana_alert: "1"
