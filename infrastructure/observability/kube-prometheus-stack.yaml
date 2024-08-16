@@ -16,6 +16,23 @@ spec:
       namespace: observability
 
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: grafana-smtp-creds
+  namespace: observability
+spec:
+  encryptedData:
+    username: AgDx9GA3ot/IrUXb4YSOQqzQIqv/Wdux0ePzSG00pV1DJ//mtnYNGbmlPKldqc8P3LxGxJgVO/1Ay4axG1q4Ev7fePPriRfRcBsC+2zmVUTkoc4GYUUYgDBU3JOf4pJWNCsxJcBQ4R9CbL64bE8V2/qTZ9D7LMPianVUeyXh6tysezYnhKP6gVfakxSOfSiGBgwYVLumBMVrHr/4DHW0vW45hbdmqnxxzS6sp85Wn6qzldg9N7k0/eGNomskXhAZAIxa0mFZ32iuDwvPkbgqnzP0rlXnHIfmsxXLN5caFH85lpBulUU/Rr4R/JnwXWtAUZpE9c3dnexHJ9O9EVy1GLv0GSryZT8eQDKb7Un+o/fqs7tPizCeIjOXJHRwEVknxk2TxVkcjX6ZN6f1MD1h6axxyWybGv4MmKQtRvylztU29vHqwzH4qf8DrlCk0m+6rrUXxc5Yyp+3n9EyIcA/N3ROHsT/UVMKj2Lh/z1BobNkCaJUsYyYPXJJcwgoKC7jL1Mfh/mR6tCeC6RKZIY+aSPFHQwEvow/4hUNBubX3mv/DmnXt8Gt3fGic9CHotQpgILr8nbBYsXw/4kARY7upt3bA6Rf18MKLGMQFgdDp6Y8EfYJVo7H2FXdIoiqm9QxKXuUqcgHkXakZGxqM12Y/crOt+9zPAoYpcuEs3T7ils4x3NjpLrL6pUTdElc0J5lMISwT9bwDtDgGcRjOKNmtQ==
+    password: AgACG/X3gWOw/gcJlbVFt0I0jBykKAlayNYroQIN+t32Muye6e8/Jwh7XieC4EyxdLQzFigToHTK4BRnZOieASs7GdscfMLZJl3yu+1nI+SIjHzXEK/6Kru/BfOhPtusHMcdxgbMaCoWmBne1lWZoSrghQ8sIAEjfQH3rCltawwTkFaJcHUrRHkzSNUNZqARyQAyeP6C331nitDO1RIFcochvLDaHpnsQ9IFdSoDMTZIVyjdgqB1QVLuxwvpr9YqF/7x8mxwaISMDlUgsF69iOSBRuj6cW+TUpotMZ0jwhwSqu27F2x2/UBD3WPIu4dr4PJafky00rF1P4rpuQy+DzF4YF46ACsqx2Ld8E6Ed9Lj7RpFMPV7BwIYzpJTFwVpNdBxLJcxCZTShPcamRvBK/Qmit2DgiSk8l9a4SdwzH1cDbQM89+xvUK3xeek1PeTmBN/bwZorGyah8d4ccxw7TcoDKiBwCfJn5nzBc9SpVIdoSWVjpSib8qI0xh3hi8O24kpn1Z7PF2vqStA/l15v/XCHue2SbmkAhaJrGn3hd0mYHi/FBucqcWcBoB/Al0YoUJzDPpS8zcw0p5uA/DDI3L2uOqS3razaA5EbMQRixE70iw9CwpiszlC/si2FypF5TuiMEkYhrYW9zumxyf3LS2cusn61199Hff8EhkP+Xq+5rQ7AUm3HjdkgnxibPAxWjOCSBgZMh1485v6XXkMAw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: grafana-smtp-creds
+      namespace: observability
+
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
@@ -56,3 +73,13 @@ spec:
       persistence:
         enabled: true
         size: 5Gi
+      smtp:
+        enabled: true
+        existingSecret: grafana-smtp-creds
+        passwordKey: username
+        userKey: password
+      grafana.ini:
+        smtp:
+          enabled: true
+          host: sandbox.smtp.mailtrap.io:587
+          from_address: server@home.com
