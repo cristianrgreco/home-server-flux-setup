@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: grafana-contact-points
+  namespace: observability
+spec:
+  encryptedData:
+    contact-points.yaml: AgDJ4EXWSxD3sInaWydhZ8Wr8FsrznSn7ApjI76vchH+U8Y+p9pLXTjwkz1jjF112qbH8sfY83nkWYEip8m3157un0FTei7n83bi02HBcMzFTYZuchjymFfWfvVlz9XeNKB+9p0CuJlIvb9bO/x8y/qQEo5+cbwfn0SkhI4ww1mxXb9u0OUmp5Kl4Gfj6BOY72YaUUgWhwmodfY9Amw42AkfrEFUwftNFMOQaS+PG20JikugqNSri8GHO9gbDU2iUBDF7/JbqGEdoNAytNp9rRc2Ax0kKrH2RrWWYT31jsCU5aeAP609o8nHIBMAGUTF25CFgEzW+8oacO8x/OO9GGFGVeuWmLC/0Y/lP0sOOjXm9pFH/Mn7QN7k7olAuHkHbGeFUgmX+RqZUv00sTRCJ0G4pzkgCZqXgqECPzxE073nOzARQGgvubSlumJW7D5aM2kArOh3AGhxDlhe0qPz/cA44iYq6Dv/weWCU2gBpbOt1fk4Hl2mNI1h2aC346sZ9+a3rrOivFRN3Igq3Gpoovjs2Q0ROBK3VE15yE8f8KNKuuHoPvnZEWikB27S4t3Iyqv4cY5GNEpHBK8gLC6TsSDKFncB2Arq0uugesf+cf2CtRHKpk/mxxgT0RZWoJG3+MP51dUVv+lDARbgprGHRyy5cVGq3OnufBkRelGbj4AzmqngbcWtrhhbiRqpF9YarEY4G4/Yai7rExiflOWVuuld02odzycc3Rj6u2SzMZ9ZUxr7saVXP6nBXXaLglwXQmvgEQL6SJnt0/JUgEy8VLL2viaQP9tQh+j/aWVYwHVuRl2s+6HTVYq9nXckFDruTqFitUwdEV8D65yH/BWcy4m+okZYztL0UEzydqjPL9K5jV/Gyo9P2Dab/3uzv5sF4aRBFFqz5WfqU/fTFkytlVAmpEki+Hed/f/wj6+ZiKcVKtKlzKL/BCvbsAIYFmFv29+HRKgY4htXoG9un2EEAxL12ssLNIx7ZGs7FjWpPxF7lXdO8NFSG6hVZt4rHi294Ge/N9oswb4/snQQm0K1mKk0qF9u9GD/vISDFwmPgA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: grafana-contact-points
+      namespace: observability
+      labels:
+        grafana_alert: "1"

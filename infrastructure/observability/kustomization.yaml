@@ -12,3 +12,4 @@ resources:
   - namespace.yaml
   - kube-prometheus-stack.yaml
   - loki-stack.yaml
+  - alerts/contact-points.yaml
