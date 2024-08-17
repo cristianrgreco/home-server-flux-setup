@@ -52,6 +52,59 @@ kubeseal --format=yaml --cert=pub-sealed-secrets.pem \
 rm auth.yaml
 ```
 
+### Provisioned dashboards/alerts/contact-points
+
+Sidecars are enabled in the Grafana chart values. The sidecar checks for Kubernetes resources labelled with `grafana_dashboard` and `grafana_alert`. These resources are YAML files which can be obtained by exporting from the Grafana UI.
+
+The alerts are added to Kubernetes as a config map.
+
+The contact-points are added to Kubernetes as a secret because they can contain sensitive values. In this case it contains a personal email address. This is the process for creating the sealed secret.
+
+1. Create the `contact-points.yaml`:
+
+    ```yaml
+    apiVersion: 1
+    contactPoints:
+      - orgId: 1
+        name: grafana-default-email
+        receivers:
+          - uid: a
+            type: email
+            settings:
+              addresses: changeme
+              singleEmail: false
+            disableResolveMessage: false
+    ```
+
+2. Base64 encode the contents of the file:
+
+    ```bash
+    cat contact-points.yaml | base64 > contact-points.yaml.enc
+    ```
+
+3. Create the YAML file `contact-points-secret.yaml` and add the base64 encoded contents to the secret:
+
+   ```yaml
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: grafana-contact-points
+     namespace: observability
+     labels:
+       grafana_alert: "1"
+   data:
+     contact-points.yaml: |
+       line1
+       line2
+   ```
+
+4. Seal the secret:
+
+   ```bash
+   kubeseal --format=yaml --cert=pub-sealed-secrets.pem \
+     < contact-points-secret.yaml > contact-points-sealed.yaml
+   ```
+
 ## Pihole
 
 http://192.168.0.241/admin
