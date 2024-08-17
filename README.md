@@ -1,5 +1,7 @@
 # Home Server Flux Setup
 
+See https://github.com/cristianrgreco/home-server-ansible-setup for how to obtain a microk8s cluster.
+
 ## MetalLB
 
 Allows you to create load balancers in your Kubernetes cluster.
