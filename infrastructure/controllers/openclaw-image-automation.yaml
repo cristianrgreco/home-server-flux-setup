@@ -1,0 +1,57 @@
+# Requires image.toolkit.fluxcd.io CRDs/controllers in flux-system.
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: openclaw
+  namespace: flux-system
+spec:
+  image: ghcr.io/openclaw/openclaw
+  interval: 30m
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: openclaw
+  namespace: flux-system
+  labels:
+    app.kubernetes.io/name: openclaw
+spec:
+  imageRepositoryRef:
+    name: openclaw
+  filterTags:
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9]+)?$"
+  policy:
+    semver:
+      range: ">=0.0.0-0"
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: openclaw
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        chore(openclaw): update image tag
+    push:
+      branch: main
+  policySelector:
+    matchLabels:
+      app.kubernetes.io/name: openclaw
+  update:
+    path: ./apps/base/openclaw
+    strategy: Setters

@@ -120,6 +120,47 @@ kubectl get secrets/pihole-adminuser -n pihole -o json \
   | jq -r '.data.password' | base64 -d
 ```
 
+## Tailscale Operator
+
+This repo now installs the Tailscale Kubernetes operator via Helm.
+
+Before it can authenticate, create a sealed secret at:
+
+- `infrastructure/controllers/operator-oauth-sealed.yaml` (`operator-oauth` secret)
+
+Create a Tailscale OAuth client with:
+
+- Scopes: `Devices Core` (write), `Auth Keys` (write), `Services` (write)
+- Tag: `tag:k8s-operator`
+
+## OpenClaw
+
+OpenClaw is deployed in namespace `openclaw` and exposed only through Tailscale Ingress (no LAN LoadBalancer).
+
+OpenClaw generates its gateway token on startup and persists it in the state directory (PVC). No pre-created Kubernetes Secret is required.
+
+Get the Tailscale URL:
+
+```bash
+kubectl get ingress -n openclaw openclaw -o jsonpath='{.status.loadBalancer.ingress[0].hostname}{"\n"}'
+```
+
+Then access:
+
+```text
+https://<hostname-from-command>
+```
+
+### Post-install onboarding (required)
+
+After Flux finishes applying manifests and the OpenClaw pod is Running, run the interactive onboarding wizard inside the pod:
+
+```bash
+kubectl -n openclaw exec -it deploy/openclaw -- sh -lc 'cd /app && node dist/index.js onboard'
+```
+
+Follow the prompts to set up gateway access and model authentication. At the end it will print a dashboard URL (including `#token=...`) you can use to open the Control UI.
+
 ## Useful commands
 
 ```bash
@@ -128,6 +169,9 @@ flux get kustomizations --watch
 flux events --watch
 flux get helmreleases --all-namespaces
 flux reconcile hr -n minecraft minecraft
+flux reconcile hr -n tailscale tailscale-operator
 flux suspend helmrelease -n minecraft minecraft
 flux resume helmrelease -n minecraft minecraft
+kubectl get pods -n openclaw
+kubectl get ingress -n openclaw
 ```

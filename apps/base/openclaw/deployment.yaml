@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openclaw
+  namespace: openclaw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: openclaw
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: openclaw
+    spec:
+      containers:
+        - name: openclaw
+          image: ghcr.io/openclaw/openclaw:2026.2.9 # {"$imagepolicy": "flux-system:openclaw"}
+          imagePullPolicy: IfNotPresent
+          command:
+            - node
+            - openclaw.mjs
+          args:
+            - gateway
+            - --allow-unconfigured
+            - --bind
+            - lan
+            - --port
+            - "18789"
+          env:
+            - name: HOME
+              value: /home/node
+            - name: TERM
+              value: xterm-256color
+          ports:
+            - name: http
+              containerPort: 18789
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          volumeMounts:
+            - name: openclaw-data
+              mountPath: /home/node/.openclaw
+      volumes:
+        - name: openclaw-data
+          persistentVolumeClaim:
+            claimName: openclaw-data
