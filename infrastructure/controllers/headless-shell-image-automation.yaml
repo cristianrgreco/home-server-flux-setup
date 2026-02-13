@@ -1,0 +1,34 @@
+# Requires image.toolkit.fluxcd.io CRDs/controllers in flux-system.
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: headless-shell
+  namespace: flux-system
+spec:
+  image: docker.io/chromedp/headless-shell
+  interval: 30m
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: headless-shell
+  namespace: flux-system
+  labels:
+    # Selected by the existing ImageUpdateAutomation in openclaw-image-automation.yaml
+    app.kubernetes.io/name: openclaw
+spec:
+  imageRepositoryRef:
+    name: headless-shell
+  # Tags look like 144.0.7559.75 (Chrome version). Convert to semver for sorting/ranges.
+  filterTags:
+    pattern: "^(?P<major>[0-9]+)\\.(?P<minor>[0-9]+)\\.(?P<build>[0-9]+)\\.(?P<patch>[0-9]+)$"
+    # Use ${name} to avoid any ambiguity in the replacement parser.
+    extract: "${major}.${minor}.${build}-${patch}"
+  policy:
+    semver:
+      # Allow minor/patch updates within the currently pinned major (144.x).
+      # Note: extracted versions always include a prerelease segment (e.g. 144.0.7559-110),
+      # so both bounds must opt-in to prereleases.
+      range: ">=144.0.0-0 <145.0.0-0"

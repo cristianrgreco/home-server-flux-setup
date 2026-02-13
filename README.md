@@ -139,6 +139,8 @@ OpenClaw is deployed in namespace `openclaw` and exposed only through Tailscale 
 
 OpenClaw generates its gateway token on startup and persists it in the state directory (PVC). No pre-created Kubernetes Secret is required.
 
+This repo runs a Chromium CDP sidecar (`chromedp/headless-shell`) in the OpenClaw pod; configure OpenClaw to attach to it via CDP (`http://127.0.0.1:9222`).
+
 Get the Tailscale URL:
 
 ```bash

@@ -45,7 +45,26 @@ spec:
           volumeMounts:
             - name: openclaw-data
               mountPath: /home/node/.openclaw
+        - name: chromium-cdp
+          image: docker.io/chromedp/headless-shell:144.0.7559.110 # {"$imagepolicy": "flux-system:headless-shell"}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: cdp
+              containerPort: 9222
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
       volumes:
         - name: openclaw-data
           persistentVolumeClaim:
             claimName: openclaw-data
+        - name: dshm
+          emptyDir:
+            medium: Memory
