@@ -7,3 +7,18 @@ spec:
   chart:
     spec:
       version: "4.x"
+  values:
+    replicaCount: 0
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              group: apps
+              version: v1
+              kind: Deployment
+              name: minecraft-minecraft
+              namespace: minecraft
+            patch: |-
+              - op: add
+                path: /spec/replicas
+                value: 0

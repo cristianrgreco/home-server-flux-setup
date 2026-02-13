@@ -8,6 +8,8 @@ patches:
   - path: minecraft-values.yaml
     target:
       kind: HelmRelease
+      name: minecraft
+      namespace: minecraft
   - path: pihole-values.yaml
     target:
       kind: HelmRelease
