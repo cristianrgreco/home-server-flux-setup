@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: openclaw
-          image: ghcr.io/openclaw/openclaw:2026.2.9 # {"$imagepolicy": "flux-system:openclaw"}
+          image: ghcr.io/openclaw/openclaw:2026.2.22 # {"$imagepolicy": "flux-system:openclaw"}
           imagePullPolicy: IfNotPresent
           command:
             - node
