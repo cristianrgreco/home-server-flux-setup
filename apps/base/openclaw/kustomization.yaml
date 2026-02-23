@@ -4,6 +4,7 @@ namespace: openclaw
 resources:
   - namespace.yaml
   - pvc.yaml
+  - secret-gateway-token.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
